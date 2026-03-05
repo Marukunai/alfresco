@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="webscripts-tutorial-share" />
+        <module name="webscripts-tutorial-platform" />
+        <module name="webscripts-tutorial-platform-docker" />
+        <module name="webscripts-tutorial-share-docker" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="webscripts-tutorial-integration-tests" target="11" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/content-tutorial/content-tutorial-integration-tests/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/content-tutorial/content-tutorial-integration-tests/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/content-tutorial/content-tutorial-platform-docker/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/content-tutorial/content-tutorial-platform-docker/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/content-tutorial/content-tutorial-platform/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/content-tutorial/content-tutorial-platform/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/content-tutorial/content-tutorial-share-docker/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/content-tutorial/content-tutorial-share-docker/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/content-tutorial/content-tutorial-share/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/content-tutorial/content-tutorial-share/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/content-tutorial/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/content-tutorial/src/main/resources" charset="UTF-8" />
+  </component>
+</project>
