@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test">
+
+    <process id="unpublishWeb" name="Unpublish Document from Web" isExecutable="true">
+
+        <!-- START EVENT -->
+        <startEvent id="start" name="Start" activiti:initiator="initiator"/>
+
+        <!-- USER TASK: Review Unpublication -->
+        <userTask id="reviewUnpublication" name="Review Unpublication Request"
+                  activiti:assignee="${initiator}">
+            <documentation>Review the document for web unpublication</documentation>
+        </userTask>
+
+        <!-- SERVICE TASK: Unpublish from Web -->
+        <serviceTask id="unpublishFromWeb" name="Unpublish from Web"
+                     activiti:expression="${publishWebService.unpublishDocument(execution.getVariable('nodeRef'))}">
+            <documentation>Removes web-published aspect and updates metadata</documentation>
+        </serviceTask>
+
+        <!-- END EVENT -->
+        <endEvent id="end" name="End"/>
+
+        <!-- SEQUENCE FLOWS -->
+        <sequenceFlow id="flow1" sourceRef="start" targetRef="reviewUnpublication"/>
+        <sequenceFlow id="flow2" sourceRef="reviewUnpublication" targetRef="unpublishFromWeb"/>
+        <sequenceFlow id="flow3" sourceRef="unpublishFromWeb" targetRef="end"/>
+
+    </process>
+
+    <!-- DIAGRAM -->
+    <bpmndi:BPMNDiagram id="BPMNDiagram_unpublishWeb">
+        <bpmndi:BPMNPlane id="BPMNPlane_unpublishWeb" bpmnElement="unpublishWeb">
+            <omgdc:Bounds height="400" width="600" x="0" y="0"/>
+
+            <bpmndi:BPMNShape id="shape_start" bpmnElement="start">
+                <omgdc:Bounds height="35" width="35" x="50" y="50"/>
+            </bpmndi:BPMNShape>
+
+            <bpmndi:BPMNShape id="shape_review" bpmnElement="reviewUnpublication">
+                <omgdc:Bounds height="60" width="120" x="150" y="35"/>
+            </bpmndi:BPMNShape>
+
+            <bpmndi:BPMNShape id="shape_unpublish" bpmnElement="unpublishFromWeb">
+                <omgdc:Bounds height="60" width="120" x="350" y="35"/>
+            </bpmndi:BPMNShape>
+
+            <bpmndi:BPMNShape id="shape_end" bpmnElement="end">
+                <omgdc:Bounds height="35" width="35" x="550" y="50"/>
+            </bpmndi:BPMNShape>
+
+            <bpmndi:BPMNEdge id="edge_flow1" bpmnElement="flow1">
+                <omgdi:waypoint x="85" y="67"/>
+                <omgdi:waypoint x="150" y="65"/>
+            </bpmndi:BPMNEdge>
+
+            <bpmndi:BPMNEdge id="edge_flow2" bpmnElement="flow2">
+                <omgdi:waypoint x="270" y="65"/>
+                <omgdi:waypoint x="350" y="65"/>
+            </bpmndi:BPMNEdge>
+
+            <bpmndi:BPMNEdge id="edge_flow3" bpmnElement="flow3">
+                <omgdi:waypoint x="470" y="65"/>
+                <omgdi:waypoint x="550" y="67"/>
+            </bpmndi:BPMNEdge>
+
+        </bpmndi:BPMNPlane>
+    </bpmndi:BPMNDiagram>
+
+</definitions>

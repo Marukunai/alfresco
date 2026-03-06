@@ -22,5 +22,79 @@
     <!-- ===============================================================================================================
         Constraints, Types, and Aspects go here...
         -->
+    <types>
+        <!-- Añadir dentro de <types> -->
+
+        <type name="ejc:publishWebTask">
+            <title>Publish Web Task</title>
+            <parent>bpm:workflowTask</parent>
+            <properties>
+                <property name="ejc:publishedDate">
+                    <type>d:datetime</type>
+                    <title>Published Date</title>
+                </property>
+                <property name="ejc:publishedBy">
+                    <type>d:text</type>
+                    <title>Published By</title>
+                </property>
+            </properties>
+        </type>
+
+        <type name="ejc:unpublishWebTask">
+            <title>Unpublish Web Task</title>
+            <parent>bpm:workflowTask</parent>
+            <properties>
+                <property name="ejc:unpublishedDate">
+                    <type>d:datetime</type>
+                    <title>Unpublished Date</title>
+                </property>
+                <property name="ejc:unpublishedBy">
+                    <type>d:text</type>
+                    <title>Unpublished By</title>
+                </property>
+            </properties>
+        </type>
+    </types>
+
+    <aspects>
+        <!-- Dentro de <aspects> -->
+        <aspect name="ejc:webPublished">
+            <title>Web Published</title>
+            <properties>
+                <property name="ejc:publishedDate">
+                    <type>d:datetime</type>
+                    <title>Published Date</title>
+                    <mandatory>false</mandatory>
+                </property>
+                <property name="ejc:publishedBy">
+                    <type>d:text</type>
+                    <title>Published By</title>
+                    <mandatory>false</mandatory>
+                </property>
+            </properties>
+            <associations/>
+            <overrides/>
+            <mandatory-aspects/>
+        </aspect>
+
+        <aspect name="ejc:webUnpublished">
+            <title>Web Unpublished</title>
+            <properties>
+                <property name="ejc:unpublishedDate">
+                    <type>d:datetime</type>
+                    <title>Unpublished Date</title>
+                    <mandatory>false</mandatory>
+                </property>
+                <property name="ejc:unpublishedBy">
+                    <type>d:text</type>
+                    <title>Unpublished By</title>
+                    <mandatory>false</mandatory>
+                </property>
+            </properties>
+            <associations/>
+            <overrides/>
+            <mandatory-aspects/>
+        </aspect>
+    </aspects>
 </model>
 
