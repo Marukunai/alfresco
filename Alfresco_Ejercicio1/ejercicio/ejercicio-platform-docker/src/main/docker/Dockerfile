@@ -1,4 +1,4 @@
-FROM ${docker.acs.image}:${alfresco.platform.version}
+FROM alfresco/alfresco-content-repository-community:7.0.0
 
 ARG TOMCAT_DIR=/usr/local/tomcat
 

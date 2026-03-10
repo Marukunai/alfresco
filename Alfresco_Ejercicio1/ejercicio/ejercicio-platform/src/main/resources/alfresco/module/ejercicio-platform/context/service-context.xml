@@ -1,12 +1,13 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
-   http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <!-- Publicación Web Service -->
-    <bean id="publishWebService" class="com.someco.service.PublishWebService">
-        <property name="workflowService" ref="WorkflowService"/>
-    </bean>
+    <bean id="publishWebService" class="com.someco.service.PublishWebService" />
+    <bean id="publishWebDelegate" class="com.someco.bpm.PublishWebDelegate" />
+
+    <bean id="set-web-flag" class="com.someco.executer.SetWebFlag" parent="action-executer" />
+    <bean id="enable-web-flag" class="com.someco.executer.EnableWebFlag" parent="action-executer" />
+    <bean id="disable-web-flag" class="com.someco.executer.DisableWebFlag" parent="action-executer" />
 
 </beans>

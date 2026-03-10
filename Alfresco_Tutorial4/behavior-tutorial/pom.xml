@@ -464,7 +464,6 @@
     <modules>
         <module>behavior-tutorial-platform</module>
         <module>behavior-tutorial-share</module>
-        <module>behavior-tutorial-integration-tests</module>
         <module>behavior-tutorial-platform-docker</module>
         <module>behavior-tutorial-share-docker</module>
     </modules>

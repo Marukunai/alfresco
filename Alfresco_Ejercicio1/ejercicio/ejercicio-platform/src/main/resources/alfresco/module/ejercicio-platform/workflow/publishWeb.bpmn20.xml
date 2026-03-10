@@ -13,11 +13,16 @@
         </userTask>
 
         <!-- SERVICE TASK: Publish to Web -->
-        <serviceTask id="publishToWeb" name="Apply Web Published"
-                     activiti:class="com.someco.bpm.PublishWebDelegate">
+        <serviceTask id="publishToWeb" name="Publish to Web"
+                     activiti:class="org.alfresco.repo.workflow.activiti.script.AlfrescoScriptDelegate">
             <extensionElements>
-                <activiti:field name="nodeRef" expression="${nodeRef}"/>
-                <activiti:field name="publishedBy" expression="${initiator}"/>
+                <activiti:field name="script">
+                    <activiti:string>
+                        var action = actions.create("set-web-flag");
+                        action.parameters["active"] = true;
+                        action.execute(bpm_package[0]);
+                    </activiti:string>
+                </activiti:field>
             </extensionElements>
         </serviceTask>
 
@@ -34,8 +39,6 @@
     <!-- DIAGRAM -->
     <bpmndi:BPMNDiagram id="BPMNDiagram_publishWeb">
         <bpmndi:BPMNPlane id="BPMNPlane_publishWeb" bpmnElement="publishWeb">
-            <omgdc:Bounds height="400" width="600" x="0" y="0"/>
-
             <bpmndi:BPMNShape id="shape_start" bpmnElement="start">
                 <omgdc:Bounds height="35" width="35" x="50" y="50"/>
             </bpmndi:BPMNShape>

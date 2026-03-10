@@ -1,64 +1,25 @@
 <alfresco-config>
-
-    <!-- OCULTAR y REEMPLAZAR ACCIONES EN DOCUMENTOS -->
     <config evaluator="string-compare" condition="DocLibActions">
         <actions>
-            <!-- OCULTAR acciones manuales de enable/disable -->
-            <action id="ejc-enable-web" type="javascript" label="Enable Web">
-                <param name="function">hideAction</param>
-            </action>
-            <action id="ejc-disable-web" type="javascript" label="Disable Web">
-                <param name="function">hideAction</param>
-            </action>
-
-            <!-- NUEVAS ACCIONES CON WORKFLOWS -->
             <action id="ejc-publish-web-workflow" type="javascript" label="Publish to Web">
                 <param name="function">onActionPublishWebWorkflow</param>
             </action>
-            <action id="ejc-unpublish-web-workflow" type="javascript" label="Unpublish from Web">
+            <action id="ejc-unpublish-web-workflow" type="javascript" label="ActionUnpublishWebWorkflow">
                 <param name="function">onActionUnpublishWebWorkflow</param>
             </action>
         </actions>
+        <actionGroups>
+            <actionGroup id="document-browse">
+                <action index="400" id="ejc-publish-web-workflow" />
+                <action index="401" id="ejc-unpublish-web-workflow" />
+            </actionGroup>
+        </actionGroups>
     </config>
 
-    <!-- CONFIGURACIÓN DE WORKFLOWS -->
     <config evaluator="string-compare" condition="WorkflowConfig">
         <workflows>
-            <workflow id="publishWeb" label="Publish Web" description="Publish document to web">
-                <form-uri>publishWeb</form-uri>
-                <definition>publishWeb</definition>
-            </workflow>
-            <workflow id="unpublishWeb" label="Unpublish Web" description="Unpublish document from web">
-                <form-uri>unpublishWeb</form-uri>
-                <definition>unpublishWeb</definition>
-            </workflow>
+            <workflow id="activiti$publishWeb" label="Publish Web" />
+            <workflow id="activiti$unpublishWeb" label="Unpublish Web" />
         </workflows>
     </config>
-
-    <!-- CONFIGURACIÓN DE DOCUMENT DETAILS PAGE -->
-    <config evaluator="string-compare" condition="DocumentDetails">
-        <document-details>
-            <actions>
-                <!-- Mostrar botón en panel de detalles -->
-                <action id="ejc-publish-web-workflow"
-                        icon="publish"
-                        label="Publish to Web"/>
-                <action id="ejc-unpublish-web-workflow"
-                        icon="unpublish"
-                        label="Unpublish from Web"/>
-            </actions>
-        </document-details>
-    </config>
-
-    <!-- CONFIGURACIÓN DE MENÚ "MÁS ACCIONES" EN CARPETA -->
-    <config evaluator="string-compare" condition="DocumentLibrary">
-        <document-list>
-            <evaluator type="org.alfresco.share.evaluator.DocLibMetadataEvaluator">
-                <params>
-                    <param name="aspect">ejc:webPublished</param>
-                </params>
-            </evaluator>
-        </document-list>
-    </config>
-
 </alfresco-config>

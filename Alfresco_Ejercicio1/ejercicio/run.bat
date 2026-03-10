@@ -1,6 +1,6 @@
 @ECHO OFF
 
-SET COMPOSE_FILE_PATH=%CD%\target\classes\docker\docker-compose.yml
+SET COMPOSE_FILE_PATH=%CD%\docker\docker-compose.yml
 
 IF [%M2_HOME%]==[] (
     SET MVN_EXEC=mvn

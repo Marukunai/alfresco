@@ -1,100 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <model name="acmew:workflowModel" xmlns="http://www.alfresco.org/model/dictionary/1.0">
-    <!-- Optional meta-data about the model -->
     <description>Sample Workflow Model</description>
     <author>My Name</author>
     <version>1.0</version>
 
     <imports>
-        <!-- Import Alfresco Dictionary Definitions -->
         <import uri="http://www.alfresco.org/model/dictionary/1.0" prefix="d"/>
-        <!-- Import Alfresco Content Domain Model Definitions -->
         <import uri="http://www.alfresco.org/model/content/1.0" prefix="cm"/>
-        <!-- Import Alfresco Workflow Model Definitions -->
         <import uri="http://www.alfresco.org/model/bpm/1.0" prefix="bpm"/>
     </imports>
 
-    <!-- Custom namespace for your domain -->
     <namespaces>
         <namespace uri="http://www.acme.org/model/workflow/1.0" prefix="acmew"/>
+        <namespace uri="http://www.someco.com/model/ejercicio/1.0" prefix="ejc" />
     </namespaces>
 
-    <!-- ===============================================================================================================
-        Constraints, Types, and Aspects go here...
-        -->
     <types>
-        <!-- Añadir dentro de <types> -->
-
         <type name="ejc:publishWebTask">
             <title>Publish Web Task</title>
             <parent>bpm:workflowTask</parent>
-            <properties>
-                <property name="ejc:publishedDate">
-                    <type>d:datetime</type>
-                    <title>Published Date</title>
-                </property>
-                <property name="ejc:publishedBy">
-                    <type>d:text</type>
-                    <title>Published By</title>
-                </property>
-            </properties>
         </type>
 
         <type name="ejc:unpublishWebTask">
             <title>Unpublish Web Task</title>
             <parent>bpm:workflowTask</parent>
-            <properties>
-                <property name="ejc:unpublishedDate">
-                    <type>d:datetime</type>
-                    <title>Unpublished Date</title>
-                </property>
-                <property name="ejc:unpublishedBy">
-                    <type>d:text</type>
-                    <title>Unpublished By</title>
-                </property>
-            </properties>
         </type>
     </types>
 
     <aspects>
-        <!-- Dentro de <aspects> -->
         <aspect name="ejc:webPublished">
             <title>Web Published</title>
             <properties>
                 <property name="ejc:publishedDate">
-                    <type>d:datetime</type>
                     <title>Published Date</title>
-                    <mandatory>false</mandatory>
+                    <type>d:datetime</type>
                 </property>
                 <property name="ejc:publishedBy">
-                    <type>d:text</type>
                     <title>Published By</title>
-                    <mandatory>false</mandatory>
+                    <type>d:text</type>
                 </property>
             </properties>
-            <associations/>
-            <overrides/>
-            <mandatory-aspects/>
         </aspect>
 
         <aspect name="ejc:webUnpublished">
             <title>Web Unpublished</title>
             <properties>
                 <property name="ejc:unpublishedDate">
-                    <type>d:datetime</type>
                     <title>Unpublished Date</title>
-                    <mandatory>false</mandatory>
+                    <type>d:datetime</type>
                 </property>
                 <property name="ejc:unpublishedBy">
-                    <type>d:text</type>
                     <title>Unpublished By</title>
-                    <mandatory>false</mandatory>
+                    <type>d:text</type>
                 </property>
             </properties>
-            <associations/>
-            <overrides/>
-            <mandatory-aspects/>
         </aspect>
     </aspects>
 </model>
-

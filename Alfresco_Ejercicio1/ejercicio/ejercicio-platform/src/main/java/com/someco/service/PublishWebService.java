@@ -3,13 +3,15 @@ package com.someco.service;
 import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.cmr.workflow.WorkflowService;
 import org.alfresco.service.cmr.workflow.WorkflowDefinition;
-import org.alfresco.service.cmr.workflow.WorkflowInstance;
 import org.alfresco.repo.security.authentication.AuthenticationUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+import org.alfresco.service.namespace.QName;
+import org.alfresco.service.cmr.workflow.WorkflowPath;
 
 /**
  * Servicio para gestionar publicación/despublicación de documentos a web
@@ -18,50 +20,36 @@ import java.util.Map;
 public class PublishWebService {
 
     @Autowired
+    @Qualifier("WorkflowService")
     private WorkflowService workflowService;
 
-    /**
-     * Inicia el workflow de publicación web
-     * @param nodeRef Referencia del documento
-     */
     public void publishDocument(NodeRef nodeRef) {
         String currentUser = AuthenticationUtil.getFullyAuthenticatedUser();
         startWorkflow("publishWeb", nodeRef, currentUser);
     }
 
-    /**
-     * Inicia el workflow de despublicación web
-     * @param nodeRef Referencia del documento
-     */
     public void unpublishDocument(NodeRef nodeRef) {
         String currentUser = AuthenticationUtil.getFullyAuthenticatedUser();
         startWorkflow("unpublishWeb", nodeRef, currentUser);
     }
 
-    /**
-     * Inicia un workflow con los parámetros necesarios
-     */
     private void startWorkflow(String workflowId, NodeRef nodeRef, String initiator) {
         try {
-            // Obtener la definición del workflow
-            WorkflowDefinition workflowDef = workflowService.getDefinitionByName(workflowId);
+            String fullWorkflowId = "activiti$" + workflowId;
+            WorkflowDefinition workflowDef = workflowService.getDefinitionByName(fullWorkflowId);
 
             if (workflowDef == null) {
-                throw new RuntimeException("Workflow '" + workflowId + "' no encontrado");
+                throw new RuntimeException("Workflow '" + fullWorkflowId + "' no encontrado");
             }
 
-            // Preparar variables del workflow
-            Map<String, Serializable> variables = new HashMap<>();
-            variables.put("bpm:assignee", initiator);
-            variables.put("nodeRef", nodeRef.toString());
+            Map<QName, Serializable> variables = new HashMap<>();
+            variables.put(QName.createQName("http://www.alfresco.org/model/bpm/1.0", "assignee"), initiator);
+            variables.put(QName.createQName("http://www.alfresco.org/model/content/1.0", "nodeRef"), nodeRef.toString());
 
-            // Iniciar instancia del workflow
-            WorkflowInstance workflowInstance = workflowService.startWorkflow(workflowDef.getId(), variables);
-
-            System.out.println("Workflow '" + workflowId + "' iniciado con ID: " + workflowInstance.getId());
+            workflowService.startWorkflow(workflowDef.getId(), variables);
 
         } catch (Exception e) {
-            throw new RuntimeException("Error iniciando workflow '" + workflowId + "': " + e.getMessage(), e);
+            throw new RuntimeException("Error iniciando workflow: " + e.getMessage(), e);
         }
     }
 }

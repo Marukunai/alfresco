@@ -9,5 +9,11 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Maven: org.alfresco:alfresco-data-model:8.423" level="project" />
+    <orderEntry type="library" name="Maven: org.alfresco:alfresco-repository:8.423" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.activemq:activemq-all:5.16.1" level="project" />
+    <orderEntry type="library" name="Maven: org.activiti:activiti-engine:5.23.0" level="project" />
+    <orderEntry type="module" module-name="actions-tutorial-platform" />
+    <orderEntry type="library" name="Maven: org.alfresco.surf:spring-webscripts:10.2" level="project" />
   </component>
 </module>

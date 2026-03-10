@@ -4,25 +4,32 @@ services:
     image: alfresco-share-ejercicio:development
     build:
       dockerfile: ./Dockerfile
-      context: ../../../ejercicio-share-docker/target
+      context: ../ejercicio-share-docker/target
     environment:
       CATALINA_OPTS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=0.0.0.0:8888"
       REPO_HOST: ejercicio-acs
       REPO_PORT: 8080
     ports:
-      - "${share.port}:8080"
-      - "${share.debug.port}:8888"
+      - "8081:8080"
+      - "8888:8888"
   ejercicio-acs:
     image: alfresco-content-services-ejercicio:development
     build:
       dockerfile: ./Dockerfile
-      context: ../../../ejercicio-platform-docker/target
+      context: ../ejercicio-platform-docker/target
     environment:
-      JAVA_TOOL_OPTIONS: "${keystore.settings}"
+      JAVA_TOOL_OPTIONS: "-Dencryption.keystore.type=JCEKS
+            -Dencryption.cipherAlgorithm=AES/CBC/PKCS5Padding
+            -Dencryption.keyAlgorithm=AES
+            -Dencryption.keystore.location=/usr/local/tomcat/shared/classes/alfresco/extension/keystore/keystore
+            -Dmetadata-keystore.password=mp6yc0UD9e
+            -Dmetadata-keystore.aliases=metadata
+            -Dmetadata-keystore.metadata.password=oKIWzVdEdA
+            -Dmetadata-keystore.metadata.algorithm=AES"
       CATALINA_OPTS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=0.0.0.0:8888"
     ports:
-      - "${acs.port}:8080"
-      - "${acs.debug.port}:8888"
+      - "8080:8080"
+      - "8889:8888"
     volumes:
       - ejercicio-acs-volume:/usr/local/tomcat/alf_data
     depends_on:
@@ -35,7 +42,7 @@ services:
       POSTGRES_PASSWORD: alfresco
     command: postgres -c max_connections=300 -c log_min_messages=LOG
     ports:
-      - "${postgres.port}:5432"
+      - "5432:5432"
     volumes:
       - ejercicio-db-volume:/var/lib/postgresql/data
   ejercicio-ass:
